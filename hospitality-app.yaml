@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospitality-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hospitality-app
+  template:
+    metadata:
+      labels:
+        app: hospitality-app
+    spec:
+      containers:
+      - name: hospitality-app
+        image: darkphoenix031/hospitality-travel-management-system:v1.0
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hospitality-service
+spec:
+  type: NodePort
+  selector:
+    app: hospitality-app
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 80
+    nodePort: 30080

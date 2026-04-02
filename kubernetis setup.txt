@@ -1,0 +1,34 @@
+Create EC2 instance on aws.
+
+Assign elastic ip for easy access to server.
+
+Install k3s: (minicube needs more that 2 core to operate "X Exiting due to RSRC_INSUFFICIENT_CORES: Docker has less than 2 CPUs available, but Kubernetes requires at least 2 to be available")
+    curl -sfL https://get.k3s.io | sh -
+    sudo k3s kubectl get nodes
+
+Configure kubectl:
+    mkdir -p ~/.kube
+    sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+    sudo chown $USER:$USER ~/.kube/config
+    echo 'export KUBECONFIG=~/.kube/config' >> ~/.bashrc
+    source ~/.bashrc
+
+Create hospitality-app.yaml
+
+Deploying our YAML file:
+    kubectl apply -f ~/hospitality-app.yaml
+
+    to get pod details in real time : kubectl get pods -w
+
+Check link:
+
+Added a autostart basch script on reboot
+
+For further detail of pods.
+    kubectl get nodes
+    kubectl get pods
+    kubectl get service
+
+Demo of scaling:
+    kubectl scale deployment hospitality-app --replicas=2 # increase no. of pods to as many as required.
+    kubectl get pods -w

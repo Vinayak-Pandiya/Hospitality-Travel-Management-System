@@ -1,0 +1,21 @@
+git pull                            // get latest code
+
+Create a Dockerfile                 // to Create docker image
+
+Create a docker-compose.yml         //to run docker image
+
+docker-compose up --build -d        //to run the image locally
+
+#Publishing the Docker Image
+
+docker login                        //login to docker hub
+
+//renaming tags so we can push it to remote repository
+docker tag hospitality-travel-management-system-frontend:latest darkphoenix031/hospitality-travel-management-system/general:v1.0 
+
+
+// push image to docker hub repo
+docker push darkphoenix031/hospitality-travel-management-system/general:v1.0
+
+// for future use:
+docker pull darkphoenix031/hospitality-travel-management-system/general:v1.0
